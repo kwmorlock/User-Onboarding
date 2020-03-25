@@ -67,11 +67,13 @@ const validateChange = event => {
         setResponse(res.data);
         console.log("Meow", response);
 
+        //after we receive data we want to clear boxes
+
         setFormState({
           name: "",
           email: "",
           password: "",
-          terms: "",
+          terms: false,
         });
       })
       .catch(err => {
@@ -79,6 +81,16 @@ const validateChange = event => {
       });
   };
 
+  const inputChange = event => {
+    event.persist();
+    const newFormData = {
+      ...formState,
+      [event.target.name]:
+        event.target.type === "checkbox" ? event.target.checked : event.target.value
+    };
+    validateChange(event);
+    setFormState(newFormData);
+  };
 
 
 
