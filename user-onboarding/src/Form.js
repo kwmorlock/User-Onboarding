@@ -39,6 +39,9 @@ function Form() {
                 onChange={inputChange}
                 />
             </label>
+
+            {errors.name.length > 0 ? <p>{errors.name}</p> : null}
+
             <label htmlFor='email'>
                 Name
                 <input
@@ -49,6 +52,9 @@ function Form() {
                 onChange={inputChange}
                 />
             </label>
+
+            {errors.email.length > 0 ? <p>{errors.email}</p> : null}
+
             <label htmlFor='password'>
                 Name
                 <input
@@ -59,6 +65,9 @@ function Form() {
                 onChange={inputChange}
                 />
             </label>
+
+            {errors.password.length > 0 ? <p>{errors.password}</p> : null}
+
             <label htmlFor='terms'>
                 Name
                 <input
@@ -69,6 +78,9 @@ function Form() {
                 onChange={inputChange}
                 />
             </label>
+
+            {errors.terms.length > 0 ? <p>{errors.terms}</p> : null}
+
         </form>
     )
 }
