@@ -27,7 +27,7 @@ function Form() {
         terms: '',
     })
 
-    const [buttondisabled, setButtondisabled] = useState(true);
+    const [buttondisabled, setButtonDisabled] = useState(true);
 
     const [response, setResponse] = useState([]);
 
@@ -110,7 +110,7 @@ const validateChange = event => {
             {errors.name.length > 0 ? <p>{errors.name}</p> : null}
 
             <label htmlFor='email'>
-                Name
+                Email
                 <input
                 id='email'
                 type='text'
@@ -123,7 +123,7 @@ const validateChange = event => {
             {errors.email.length > 0 ? <p>{errors.email}</p> : null}
 
             <label htmlFor='password'>
-                Name
+                Password
                 <input
                 id='password'
                 type='text'
@@ -136,10 +136,10 @@ const validateChange = event => {
             {errors.password.length > 0 ? <p>{errors.password}</p> : null}
 
             <label htmlFor='terms'>
-                Name
+                Terms
                 <input
                 id='terms'
-                type='text'
+                type='checkbox'
                 name='terms'
                 value={formState.terms}
                 onChange={inputChange}
@@ -148,6 +148,7 @@ const validateChange = event => {
 
             {errors.terms.length > 0 ? <p>{errors.terms}</p> : null}
 
+            <button disabled={buttondisabled}>Submit</button>
         </form>
     )
 }
