@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import axios from 'axios';
 
-// const formSchema = yup.object().shape().
+const formSchema = yup.object().shape({
 
-//     name: "",
-//     email: "",
-//     password: "",
-    
+    name: yup.string().required("Name is required")
+    email: yup.string().("Email is required"),
+    password: yup.string().min(4, "Too short, make longer!").required,
+    //password min makes it so the password has to be atleast 4 characters long
+    terms: yup.boolean().oneOf([true], "Please sign your soul over to me")
+})
 
 function Form() {
     const [formState, setformState] = useState({
