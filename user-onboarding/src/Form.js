@@ -13,7 +13,7 @@ const formSchema = yup.object().shape({
 })
 
 function Form() {
-    const [formState, setformState] = useState({
+    const [formState, setFormState] = useState({
         name: '',
         email: '',
         password: '',
@@ -29,6 +29,7 @@ function Form() {
 
     const [buttondisabled, setButtondisabled] = useState(true);
 
+    const [response, setResponse] = useState([]);
 
 //validating useEffect
 useEffect(() => {
@@ -56,6 +57,29 @@ const validateChange = event => {
         });
       });
   };
+
+  //preventDefault will prevent page from refreshing
+  const formSubmit = event => {
+    event.preventDefault();
+    axios
+      .post("https://reqres.in/api/users", formState)
+      .then(res => {
+        setResponse(res.data);
+        console.log("Meow", response);
+
+        setFormState({
+          name: "",
+          email: "",
+          password: "",
+          terms: "",
+        });
+      })
+      .catch(err => {
+        console.log(err.res);
+      });
+  };
+
+
 
 
     return (
