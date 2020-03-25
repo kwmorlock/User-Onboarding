@@ -29,6 +29,8 @@ function Form() {
 
     const [buttondisabled, setButtonDisabled] = useState(true);
 
+    const [users, setUsers] = useState([]);
+
     const [response, setResponse] = useState([]);
 
 //validating useEffect
@@ -40,20 +42,20 @@ useEffect(() => {
 
 //validating change
 
-const validateChange = event => {
+const validateChange = (targetName, targetValue) => {
     yup
-      .reach(formSchema, event.target.name)
-      .validate(event.target.value)
+      .reach(formSchema, targetName)
+      .validate(targetValue)
       .then(valid => {
         setErrors({
           ...errors,
-          [event.target.name]: ""
+          [targetName]: ""
         });
       })
       .catch(err => {
         setErrors({
           ...errors,
-          [event.target.name]: err.errors
+          [targetName]: err.errors
         });
       });
   };
@@ -64,7 +66,7 @@ const validateChange = event => {
     axios
       .post("https://reqres.in/api/users", formState)
       .then(res => {
-        setResponse(res.data);
+        setUsers(existing => [...existing,res.data]);
         console.log("Meow", response);
 
         //after we receive data we want to clear boxes
@@ -83,18 +85,23 @@ const validateChange = event => {
 
   const inputChange = event => {
     event.persist();
+
+    const targetName = event.target.name;
+    const targetValue = event.target.type === "checkbox" ? event.target.checked : event.target.value
+    
+
     const newFormData = {
       ...formState,
-      [event.target.name]:
-        event.target.type === "checkbox" ? event.target.checked : event.target.value
+      [targetName]: targetValue
     };
-    validateChange(event);
+    validateChange(targetName, targetValue);
     setFormState(newFormData);
   };
 
 
 
     return (
+        <div>
         <form onSubmit={formSubmit}>
             <label htmlFor='name'>
                 Name
@@ -150,6 +157,9 @@ const validateChange = event => {
 
             <button disabled={buttondisabled}>Submit</button>
         </form>
+
+        {users.map(user => <p>{user.name} {user.email}</p>)}
+        </div>
     )
 }
 
