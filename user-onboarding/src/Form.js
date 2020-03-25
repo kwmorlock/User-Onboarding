@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const formSchema = yup.object().shape({
 
-    name: yup.string().required("Name is required")
+    name: yup.string().required("Name is required"),
     email: yup.string().email().required("Email is required"),
     password: yup.string().min(4, "Too short, make longer!").required("PLZ ADD"),
     //password min makes it so the password has to be atleast 4 characters long
@@ -37,7 +37,25 @@ useEffect(() => {
       });
     }, [formState]);
 
+//validating change
 
+const validateChange = event => {
+    yup
+      .reach(formSchema, event.target.name)
+      .validate(event.target.value)
+      .then(valid => {
+        setErrors({
+          ...errors,
+          [event.target.name]: ""
+        });
+      })
+      .catch(err => {
+        setErrors({
+          ...errors,
+          [event.target.name]: err.errors
+        });
+      });
+  };
 
 
     return (
