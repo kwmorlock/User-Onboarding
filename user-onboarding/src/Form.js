@@ -10,15 +10,25 @@ import axios from 'axios';
     
 
 function Form() {
-    const [formState, setformState] = useState[{
+    const [formState, setformState] = useState({
         name: '',
         email: '',
         password: '',
         terms: '',
-    }];
+    });
+
+    const [errors, setErrors] = useState({
+        name: '',
+        email: '',
+        password: '',
+        terms: '',
+    })
+
+    const [buttondisabled, setButtondisabled] = useState(true)
+
 
     return (
-        <Form onSubmit={formSubmit}>
+        <form onSubmit={formSubmit}>
             <label htmlFor='name'>
                 Name
                 <input
@@ -59,7 +69,7 @@ function Form() {
                 onChange={inputChange}
                 />
             </label>
-        </Form>
+        </form>
     )
 }
 
