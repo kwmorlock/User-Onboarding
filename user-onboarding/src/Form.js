@@ -5,10 +5,11 @@ import axios from 'axios';
 const formSchema = yup.object().shape({
 
     name: yup.string().required("Name is required")
-    email: yup.string().("Email is required"),
-    password: yup.string().min(4, "Too short, make longer!").required,
+    email: yup.string().email().required("Email is required"),
+    password: yup.string().min(4, "Too short, make longer!").required("PLZ ADD"),
     //password min makes it so the password has to be atleast 4 characters long
     terms: yup.boolean().oneOf([true], "Please sign your soul over to me")
+    //boolean and not string because it has to be true or false
 })
 
 function Form() {
@@ -26,7 +27,17 @@ function Form() {
         terms: '',
     })
 
-    const [buttondisabled, setButtondisabled] = useState(true)
+    const [buttondisabled, setButtondisabled] = useState(true);
+
+
+//validating useEffect
+useEffect(() => {
+    formSchema.isValid(formState).then(valid => {
+        setButtonDisabled(!valid);
+      });
+    }, [formState]);
+
+
 
 
     return (
