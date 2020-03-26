@@ -107,6 +107,8 @@ const validateChange = (targetName, targetValue) => {
                 Name
                 <input
                 id='name'
+                //data-cy will allow us to make it more specific in tests
+                data-cy="name"
                 type='text'
                 name='name'
                 value={formState.name}
@@ -120,6 +122,7 @@ const validateChange = (targetName, targetValue) => {
                 Email
                 <input
                 id='email'
+                data-cy="email"
                 type='text'
                 name='email'
                 value={formState.email}
@@ -133,6 +136,7 @@ const validateChange = (targetName, targetValue) => {
                 Password
                 <input
                 id='password'
+                data-cy="password"
                 type='text'
                 name='password'
                 value={formState.password}
@@ -146,6 +150,7 @@ const validateChange = (targetName, targetValue) => {
                 Terms
                 <input
                 id='terms'
+                data-cy="terms"
                 type='checkbox'
                 name='terms'
                 value={formState.terms}
